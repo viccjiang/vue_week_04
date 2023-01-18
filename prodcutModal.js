@@ -23,8 +23,8 @@ export default {
               <div v-if="Array.isArray(product.imagesUrl)">
                 <div class="mb-1" v-for="(image, key) in product.imagesUrl" :key="key">
                   <div class="form-group">
-                    <label for="imageUrl" class="form-label">圖片網址</label>
-                    <input v-model="product.imagesUrl[key]" type="text" class="form-control"
+                    <label :for="product.imagesUrl[key]" class="form-label">圖片網址</label>
+                    <input :id="product.imagesUrl[key]" v-model="product.imagesUrl[key]" type="text" class="form-control"
                       placeholder="請輸入圖片連結">
                   </div>
                   <img class="img-fluid" :src="image">
@@ -32,7 +32,7 @@ export default {
                 <div
                   v-if="!product.imagesUrl.length || product.imagesUrl[product.imagesUrl.length - 1]">
                   <button class="btn btn-outline-primary btn-sm d-block w-100"
-                    @click="product.imagesUrl.push('')">
+                  @click="$emit('createImages')">
                     新增圖片
                   </button>
                 </div>

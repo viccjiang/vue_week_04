@@ -44,7 +44,7 @@ const app = createApp({
         })
         .catch((err) => {
           alert(err.response.data.message)
-          window.location = 'login.html';
+          window.location = 'index.html';
         })
     },
     getData(page = 1) {
@@ -57,7 +57,7 @@ const app = createApp({
           this.pagination = pagination;
         }).catch((err) => {
           alert(err.response.data.message);
-          window.location = 'login.html';
+          window.location = 'index.html';
         })
     },
     openModal(status, item) {
