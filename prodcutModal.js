@@ -32,7 +32,7 @@ export default {
                 <div
                   v-if="!product.imagesUrl.length || product.imagesUrl[product.imagesUrl.length - 1]">
                   <button class="btn btn-outline-primary btn-sm d-block w-100"
-                  @click="$emit('createImages')">
+                  @click="product.imagesUrl.push('')">
                     新增圖片
                   </button>
                 </div>

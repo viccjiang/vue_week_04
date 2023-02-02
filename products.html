@@ -51,8 +51,11 @@
               {{ item.price }}
             </td>
             <td>
-              <span v-if="item.is_enabled" class="text-success">啟用</span>
-              <span v-else>未啟用</span>
+              <!-- <span v-if="item.is_enabled" class="text-success">啟用</span>
+              <span v-else>未啟用</span> -->
+              <span v-bind:class="{ 'text-success': item.is_enabled }">
+								{{ item.is_enabled ? '啟用' : '未啟用' }}
+							</span>
             </td>
             <td>
               <div class="btn-group">
@@ -73,14 +76,14 @@
     </div>
     <productmodal :product="tempProduct" :is-new="isNew" @update-product="updateProduct" @create-images="createImages"></productmodal>
     <!-- Modal -->
-    <!-- <product-modal ref="product" :product="tempProduct" :is-new="isNew" @update="getData"></product-modal>
-    <del-product-modal ref="delProduct" :item="tempProduct" @update="getData"></del-product-modal> -->
+    <!-- <product-modal ref="product" :product="tempProduct" :is-new="isNew" @update="getData"></product-modal> -->
+    <delproductmodal :product="tempProduct" @del-product="delProduct"></delproductmodal>
     <!-- Modal -->
 
   </div>
 
 
-  <script type="text/x-template" id="delProductModal">
+  <!-- <script type="text/x-template" id="delProductModal">
       <div id="delProductModal" ref="modal" class="modal fade" tabindex="-1" aria-labelledby="delProductModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
@@ -106,7 +109,7 @@
           </div>
         </div>
       </div>
-    </script>
+    </script> -->
 
   <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
