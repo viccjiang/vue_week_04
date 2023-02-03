@@ -6,6 +6,7 @@ import delproductmodal from './delProdcutModal.js'
 let productModal = null;
 let delProductModal = null;
 
+
 const app = createApp({
   components: {
     pagination,
@@ -25,6 +26,7 @@ const app = createApp({
     }
   },
   mounted() {
+    
     // 1. 初始化 new bootstrap
     // 2. 呼叫方法 .show .hide
     productModal = new bootstrap.Modal(document.getElementById('productModal'), {
@@ -60,6 +62,7 @@ const app = createApp({
 
       axios.get(url)
         .then((response) => {
+          // 先把 products pagination資料存起來
           const { products, pagination } = response.data;
           this.products = products;
           this.pagination = pagination;

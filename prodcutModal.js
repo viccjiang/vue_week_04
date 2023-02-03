@@ -20,6 +20,20 @@ export default {
                 <input v-model="product.imageUrl" type="text" class="form-control" placeholder="請輸入圖片連結">
                 <img class="img-fluid" :src="product.imageUrl">
               </div>
+
+              <div class="mb-3">
+                <label for="customFile" class="form-label"
+                  >或上傳圖片
+                </label>
+                <input
+                  type="file"
+                  id="customFile"
+                  class="form-control"
+                  ref="fileInput"
+                  @change="uploadFile"
+                />
+              </div>
+              
               <div v-if="Array.isArray(product.imagesUrl)">
                 <div class="mb-1" v-for="(image, key) in product.imagesUrl" :key="key">
                   <div class="form-group">
@@ -113,4 +127,37 @@ export default {
       </div>
     </div>
   </div>`,
+  data() {
+    return {
+      apiUrl: 'https://vue3-course-api.hexschool.io/v2',
+      apiPath: 'jiangs2023',
+    }
+  },
+  methods: {
+    uploadFile() {
+      // 把上傳的檔案取出來
+      const uploadedFile = this.$refs.fileInput.files[0];
+      // 轉成 formData 格式
+      const formData = new FormData();
+      formData.append('file-to-upload', uploadedFile);
+      const url = `${this.apiUrl}/api/${this.apiPath}/admin/upload`;
+      axios.post(url, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then((response) => {
+          if (response.data.success) {
+            this.product.imageUrl = response.data.imageUrl;
+            this.$refs.fileInput.value = '';
+            console.log(response.data.imageUrl);
+        }else {
+            this.$refs.fileInput.value = '';
+          }
+        })
+        .catch((error) => {
+          console.dir(error.data.message)
+        });
+    },
+  },
 }

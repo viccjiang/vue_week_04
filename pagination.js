@@ -5,7 +5,7 @@ export default {
 
       <li
         class="page-item"
-        :class="{'disabled': pages.current_page === 1}"
+        :class="{'disabled': !pages.has_pre}"
       >
         <a
           class="page-link"
@@ -37,7 +37,7 @@ export default {
 
       <li
         class="page-item"
-        :class="{'disabled': pages.current_page === pages.total_pages}"
+        :class="{'disabled': !pages.has_next}"
       >
         <a
           class="page-link"
